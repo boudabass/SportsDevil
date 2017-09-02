@@ -84,24 +84,24 @@ item_info_from=tmpUrl
 item_info_convert=getInfo('%s','.*?["'/](\d{1,3}\.\d{1,3}\.\d{1,3}\.[^"'/]+)["'/]','@REFERER@')
 item_info_build=%s
 
-
 item_info_name=tmp1
 item_info_from=tmpUrl
-item_info_convert=getInfo('%s','.*?SWFObject\('([^']+)'.*?["'=]([12]\d{4}).*?(MT[^'"&]+)','@REFERER@','swf1|f1|t')
+#item_info_convert=getInfo('%s','.*?SWFObject\('([^']+)'.*?["'=]([12]\d{4}).*?(MT[^'"&]+)','@REFERER@','swf1|f1|t')
+item_info_convert=getInfo('%s','.*id="(\w+)">(\d+).*?param\s+name='movie'\s+value='([^']+).*?document.getElementById\("\1.*?flashvars.*?file=.*?(\?[^&]+)','@REFERER@','junk|t|swf1|f1')
 item_info_build=%s
-
-item_info_name=sp2
-item_info_from=tmpUrl
-item_info_convert=getInfo('%s','.*\s*=\s*["'](%[^"']+)["']','@REFERER@')
-item_info_build=%s
-
+#
+#item_info_name=sp2
+#item_info_from=tmpUrl
+#item_info_convert=getInfo('%s','.*\s*=\s*["'](%[^"']+)["']','@REFERER@')
+#item_info_build=%s
+#
 item_info_name=file1_
 item_info_from=f1
-item_info_convert=ifEmpty('%s','','%s?')
+item_info_convert=ifEmpty('%s','','%s')
 item_info_build=%s
-
-item_info_name=file1
-item_info_from=file1_+t+sp2+'
+#
+item_info_name=file
+item_info_from=t+file1_
 #item_info_convert=debug
 item_info_build=%s
 
@@ -142,7 +142,7 @@ item_info_build=%s
 
 item_info_name=file3
 item_info_from=n3+file3_+'
-item_info_convert=debug
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=file
