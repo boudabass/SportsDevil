@@ -5,8 +5,7 @@ item_info_build=%s
 
 item_info_name=sUrl
 item_info_from=@PARAM1@
-#item_info_convert=getInfo('%s','.*(//wakwaw\.xyz/stats\.php\?p=[^"]+)','@REFERER@')
-item_info_convert=getInfo('%s','.*(//.*sucurifirewall\.com/stats\.php\?p=[^"]+)','@REFERER@')
+item_info_convert=getInfo('%s','.*src="(.*?stats\.php.*?)"','@REFERER@')
 #item_info_convert=debug
 item_info_build=http:%s
 
