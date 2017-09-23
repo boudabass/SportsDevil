@@ -9,18 +9,15 @@ item_info_build=%s
 
 item_info_name=zm_
 item_info_from=zm+'/sdembed?v='+id
-#item_info_convert=debug
 item_info_build=http://%s
 
 item_info_name=zmhost
 item_info_from=zm_
 item_info_convert=ifEmpty('%s','','%s')
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=postData
 item_info_from=pid='+pp
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=postUrl
@@ -30,14 +27,12 @@ item_info_build=%s
 item_info_name=file1
 item_info_from=postUrl
 item_info_convert=getInfo('%s','.*?rtmp://.*?\/(\w+)"','@REFERER@')
-#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=req2
 item_info_from=postUrl
 item_info_convert=getInfo('%s','.*?file.?:\s*[\'"]((?:hd)?smil[^\'"]+)[\'"].*','@REFERER@')
 item_info_convert=ifEmpty('%s','','http://www.seelive.me/%s')
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=file2
@@ -56,14 +51,12 @@ item_info_build=.*;(\w+\s*=\s*{.*?"\w+"\s*:\s*"%s".*?};)
 item_info_name=data
 item_info_from=postUrl
 item_info_convert=getInfo('%s','@rex1@','@REFERER@')
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ip
 item_info_from=data
 item_info_convert=parseText('%s','.*:window\.atob\("([^"]+)')
 item_info_convert=decodeBase64
-item_info_convert=debug
 item_info_build=%s
 
 item_info_name=rtmp_1
