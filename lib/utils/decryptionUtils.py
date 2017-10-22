@@ -3,7 +3,7 @@ import pyDes
 import urllib
 import re
 from regexUtils import parseTextToGroups
-from javascriptUtils import JsFunctions, JsUnpacker, JsUnpackerV2, JsUnpacker95High, JsUnwiser, JsUnIonCube, JsUnFunc, JsUnPP, JsUnPush
+from javascriptUtils import JsFunctions, JsUnpacker, JsUnpackerV2, JsUnpacker95High, JsUnwiser, JsUnIonCube, JsUnFunc, JsUnPP, JsUnPush, JSUnfuck
 from hivelogic import hivelogic
 try: import json
 except ImportError: import simplejson as json
@@ -221,6 +221,25 @@ def decryptSaurus(data):
 
     return data
 
+def unFuckFirst(data):
+    try:
+        #lib.common.log("JairoDemyst: " + data)
+        p = 186
+        hiro = re.findall(r'"hiro":"(.*?)"', data)[0]
+        parts = re.findall('([^;]+)', hiro)
+        for part in parts:
+            if '(' in part:
+                f = re.findall('(.*?)\((.+)\)',part)[0]
+                exec(f[0] + JSUnfuck(f[1]).decode())
+            else:
+                exec(part)
+        if isinstance(n, long):
+            data = re.sub(r'"hiro":"(.*?)"', '"hiro":%s'%str(n), data, count=1)
+
+        return data
+    except:
+        return data
+
 def doDemystify(data):
     from base64 import b64decode
     escape_again=False
@@ -416,6 +435,10 @@ def doDemystify(data):
 
     if JsHive.contains_hivelogic(data):
         data = JsHive.unpack_hivelogic(data)
+    
+    if re.search(r'hiro":".*?[\(\)\[\]\!\+]+', data) != None:
+        data = unFuckFirst(data)
+        #lib.common.log("JairoDemyst: " + data)
     
     if "zoomtv" in data:
         #lib.common.log("JairoZoom:" + data)
