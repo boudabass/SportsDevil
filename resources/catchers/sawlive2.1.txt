@@ -32,7 +32,7 @@ item_info_build=%s
 item_info_name=p1
 item_info_from=u1+u2+'
 #item_info_convert=ifEmpty('@u1@','','%s')
-item_info_convert=debug
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=p1.tmp__
@@ -58,26 +58,30 @@ item_info_build=%s
 item_info_name=p2.tmp
 item_info_from=tmpUrl1
 item_info_convert=getInfo('%s','(.*span\s+id="sloading".*?<\/script>\s*<span\s+id="splay".*?<\/object>)','@REFERER@')
-#item_info_convert=unicode_escape
-#item_info_convert=parseText('%s','.*id="\w+">(\d{5}).*param\s+name='movie'\s+value='([^']+).*file=.*(\?[^&]+)&streamer=.*?:\/\/([^&]+)','f1|swf1|f2|rtmp1')
-item_info_convert=debug
+item_info_convert=unicode_escape
+item_info_convert=parseText('%s','.*id="\w+">(\d{5}).*param\s+name='movie'\s+value='([^']+).*file=.*(\?[^&]+)&streamer=.*?:\/\/([^&]+)','f1|swf2|f2|rtmp2')
+#item_info_convert=debug
+item_info_build=%s
+
+item_info_name=file2
+item_info_from=f1+f2+'
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=ref
 item_info_from=p0||@PARAM1@
 item_info_build=%s
 
-
 item_info_name=file
-item_info_from=file1
+item_info_from=file2||file1
 item_info_build=%s
 
 item_info_name=swf
-item_info_from=swf1
+item_info_from=swf2||swf1
 item_info_build=%s
 
 item_info_name=rtmp
-item_info_from=rtmp1
+item_info_from=rtmp2||rtmp1
 item_info_build=%s
 
 item_info_name=url
