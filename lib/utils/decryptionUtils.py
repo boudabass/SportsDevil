@@ -69,20 +69,22 @@ def zadd2(data):
         #jsvar = re.findall(".*\w+\s*=\s*eval\(\"\(\"\+(\w+)\+", data)[0]
         matches = re.findall('\w+\s*=\s*\w+\s*\+\s*(\w+)',data)
         jsall = ''
-        try:
-            firstword = matches[0]
-            for match in matches:
-                tmp = re.findall(match+'\s*=\s*[\'\"](.*?)[\"\'];',data)
-                if len(tmp)>0:
-                    jsall += tmp[0]
-            if re.compile(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", flags=re.DOTALL).findall(data):
-                 tmp_ = re.sub(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", jsall, data, count=1, flags=re.DOTALL)
-            if re.compile(r"\w+\.\w+\({.*}\s+</script>(.*)</script>", flags=re.DOTALL).findall(data):
-                tmp_ = re.sub(r"\w+.\w+\({.*}\s+</script>(.*)</script>", jsall, data, count=1, flags=re.DOTALL)
-            data = tmp_
-        except:
-            data = data
-            pass
+        #try:
+        firstword = matches[0]
+        for match in matches:
+            #tmp = re.findall(match+'\s*=\s*[\'\"](.*?)[\"\'];',data)
+            tmp = re.findall(r"(\w+)='(.*?)';%s=(\1)"%match, data)
+            if len(tmp)>0:
+                jsall += tmp[0][1]
+        lib.common.log("JairoXZADD:" + jsall)
+        if re.compile(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", flags=re.DOTALL).findall(data):
+                tmp_ = re.sub(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", jsall, data, count=1, flags=re.DOTALL)
+        if re.compile(r"\w+\.\w+\({.*}\s+</script>(.*)</script>", flags=re.DOTALL).findall(data):
+            tmp_ = re.sub(r"\w+.\w+\({.*}\s+</script>(.*)</script>", jsall, data, count=1, flags=re.DOTALL)
+        data = tmp_
+        #except:
+            #data = data
+            #pass
 
     return data
 
@@ -440,7 +442,7 @@ def doDemystify(data):
         data = unFuckFirst(data)
         #lib.common.log("JairoDemyst: " + data)
     
-    if "zoomtv" in data:
+    if re.search(r"zoomtv", data, re.IGNORECASE) != None:
         #lib.common.log("JairoZoom:" + data)
         data = zadd(data)
         data = zadd2(data)
