@@ -92,7 +92,7 @@ def create_decryptor(self, key, sequence):
                 uri = urljoin(saw_key,'/m/stream?'+_tmp[-1])
             elif 'nlsk' in key.uri:
                 _tmp = key.uri.split('?')
-                uri = 'http://bile.level303.club/m/stream?'+_tmp[-1])
+                uri = 'http://bile.level303.club/m/stream?'+_tmp[-1]
             elif 'nhl.com' in key.uri:
                 _tmp = key.uri.split('/')
                 uri = urljoin(saw_key,'/m/streams?ci='+_tmp[-3]+'&k='+_tmp[-1])
