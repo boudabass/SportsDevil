@@ -651,7 +651,7 @@ class Parser(object):
                 src = cc.replace(item, params, src)
 
             elif command == 'replaceRegex':
-                src = cc.replaceRegex(params, src)
+                src = cc.replaceRegex(item, params, src)
 
             elif command == 'ifEmpty':
                 src = cc.ifEmpty(item, params, src)

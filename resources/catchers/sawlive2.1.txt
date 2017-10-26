@@ -125,5 +125,5 @@ item_info_convert=ifEmpty('@rtmp@','','%s')
 item_info_build=%s
 
 item_info_name=url
-item_info_from=rtmpurl||hlsurl
+item_info_from=hlsurl||rtmpurl
 item_info_build=%s
