@@ -91,24 +91,6 @@ def zadd2(data):
         #jsvar = re.findall(".*\w+\s*=\s*eval\(\"\(\"\+(\w+)\+", data)[0]
         matches = re.findall('\w+\s*=.*?\+\s*(\w+)',data)
         jsall = ''
-<<<<<<< HEAD
-        #try:
-        firstword = matches[0]
-        for match in matches:
-            #tmp = re.findall(match+'\s*=\s*[\'\"](.*?)[\"\'];',data)
-            tmp = re.findall(r"(\w+)='(.*?)';%s=(\1)"%match, data)
-            if len(tmp)>0:
-                jsall += tmp[0][1]
-        lib.common.log("JairoXZADD:" + jsall)
-        if re.compile(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", flags=re.DOTALL).findall(data):
-                tmp_ = re.sub(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", jsall, data, count=1, flags=re.DOTALL)
-        if re.compile(r"\w+\.\w+\({.*}\s+</script>(.*)</script>", flags=re.DOTALL).findall(data):
-            tmp_ = re.sub(r"\w+.\w+\({.*}\s+</script>(.*)</script>", jsall, data, count=1, flags=re.DOTALL)
-        data = tmp_
-        #except:
-            #data = data
-            #pass
-=======
         try:
             firstword = matches[0]
             for match in matches:
@@ -125,7 +107,6 @@ def zadd2(data):
         except:
             data = data
             pass
->>>>>>> f9454905e4a581e51d2aa851677f1aa2d6823b6b
 
     return data
 
