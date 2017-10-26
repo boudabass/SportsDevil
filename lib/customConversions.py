@@ -309,12 +309,14 @@ def replace(item, params, src):
     return paramstr.replace(paramSrch,paramRepl)
 
 
-def replaceRegex(params, src):
+def replaceRegex(item, params, src):
     paramArr = __parseParams(params)
     paramStr = paramArr[0].replace('%s', src)
     paramSrch = paramArr[1]
     paramRepl = paramArr[2]
-
+    if paramRepl.startswith('@') and paramRepl.endswith('@'):
+        paramRepl = item.getInfo(paramRepl.strip('@'))
+    
     r = re.compile(paramSrch, re.IGNORECASE + re.DOTALL + re.MULTILINE + re.UNICODE)
     ms = r.findall(paramStr)
     if ms:

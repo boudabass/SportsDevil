@@ -97,11 +97,12 @@ def zadd2(data):
                 tmp = re.findall(r";\s*(\w+)\s*=\s*'(.*?)';\s*%s\s*=\s*(\1)"%match,data)
                 if len(tmp)>0:
                     jsall += tmp[0][1]
-            #lib.common.log("JairoXZADD:" + jsall)
             if re.compile(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", flags=re.DOTALL).findall(data):
                     tmp_ = re.sub(r"jwplayer\(\'\w+.*eval\(\"\(\"\s*\+\s*\w+\s*\+\s*\"\)\"\);", jsall, data, count=1, flags=re.DOTALL)
             if re.compile(r"\w+\.\w+\({.*}\s+</script>(.*)</script>", flags=re.DOTALL).findall(data):
                 tmp_ = re.sub(r"\w+.\w+\({.*}\s+</script>(.*)</script>", jsall, data, count=1, flags=re.DOTALL)
+            if re.search(r'player.attach.*?<\/script>', data, re.DOTALL) != None:
+                tmp_ = re.sub(r'player.attach.*?<\/script>', jsall, data, count=1, flags=re.DOTALL)
             data = tmp_
         except:
             data = data
