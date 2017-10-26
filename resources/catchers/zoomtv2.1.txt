@@ -4,14 +4,14 @@ item_info_build=nohead
 
 item_info_name=qs
 item_info_from=@PARAM1@
-item_info_convert=parseText('%s','.*v_vid=?([\d\w]+)?,\s*v_vpp="([^"]+)",\s*v_vpv="([^"]+)"\s*;\s*\w+\s*=\s*"([^"]+)"','id|pp|pv|zm')
+item_info_convert=parseText('%s','.*v_vid="?([\d\w]+)"?,\s*v_vpp="([^"]+)",\s*v_vpv="([^"]+)"\s*;\s*\w+\s*=\s*"([^"]+)"','id|pp|pv|zm')
 #item_info_convert=startLivestreamerProxy
 item_info_build=%s
 
 item_info_name=zmhost
 item_info_from=zm
 item_info_convert=ifEmpty('%s','http://www.zoomtv.me/hdembed.php','http://%s/hdembed.php')
-item_info_convert=debug
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=postData

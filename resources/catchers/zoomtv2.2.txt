@@ -9,6 +9,7 @@ item_info_build=%s
 
 item_info_name=zm_
 item_info_from=zm+'/sdembed?v='+id
+item_info_convert=debug
 item_info_build=http://%s
 
 item_info_name=zmhost
