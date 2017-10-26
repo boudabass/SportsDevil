@@ -26,7 +26,7 @@ from utils import rowbalance as rb
 
 from utils.fileUtils import findInSubdirectory, getFileContent, getFileExtension
 from utils.scrapingUtils import findVideoFrameLink, findContentRefreshLink, findRTMP, findJS, findPHP, getHostName, findEmbedPHPLink
-from common import getHTML
+from common import getHTML, getLocation
 
 
 class ParsingResult(object):
@@ -273,6 +273,7 @@ class Parser(object):
                     if startUrl == red:
                         common.log('    -> No redirect found')
                     else:
+                        #red = getLocation(red) #for tinyurl etc redirects
                         common.log('    -> Redirect: ' + red)
                         if back == red:
                             break
@@ -327,7 +328,8 @@ class Parser(object):
             return findVideoFrameLink(page, data)
         elif findEmbedPHPLink(data):
             return findEmbedPHPLink(data)
-            
+
+                  
         if not demystify:
             return self.__findRedirect(page, referer, True)
 
