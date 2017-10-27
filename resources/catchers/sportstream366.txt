@@ -29,11 +29,7 @@ item_info_build=%s
 
 item_info_name=url
 #item_info_from=rtmp+' app=xlive?vi=' + file + '& flashVer=WIN\27,0,0,180 conn=S:client conn=S:3.1.3.29 conn=S:en swfhash=eddf8ac6deb87e76930dc3255e65ba8f54be0e4674c740f0e7c5129de11d5716 swfsize=513352 live=true playpath=raw:'+file+'
-item_info_from=rtmp+' app=xlive?vi=' + file + '& flashVer=WIN\27,0,0,180 conn=S:client conn=S:3.1.3.29 conn=S:en swfVfy=http://sportstream-365.com/getZone/VideoPlayerSportstream.swf?v=1509068627573 live=true pageUrl=' + purl
-# app : xlive?vi=959517&
-#  flashVer : WIN 27,0,0,180
-#    swfUrl : http://sportstream-365.com/getZone/VideoPlayerSportstream.swf?v=1509068627573
-#     tcUrl : rtmpe://93.189.62.10:1935/xlive?vi=959517&
-#   pageUrl : http://sportstream-365.com/viewer?game=144577148
+#item_info_from=rtmp+' app=xlive?vi=' + file + '& flashVer=WIN\27,0,0,180 conn=S:client conn=S:3.1.3.29 conn=S:en swfVfy=http://sportstream-365.com/getZone/VideoPlayerSportstream.swf?v=1509068627573 live=true pageUrl=' + purl
+item_info_from=rtmp+' app=xlive flashVer=WIN\23,0,0,166 conn=S:client conn=S:3.1.3.8 conn=S:en swfhash=d42335ee990a4841d741c40525fd316e9ff96188fa062f68403104463405b4f3 swfsize=575927 live=true playpath=raw:'+file+'
 item_info_build=%s
 
