@@ -9,16 +9,16 @@ item_info_build=%s
 
 item_info_name=tokUrl
 item_info_from=@PARAM1@
-item_info_build=http://bro.adca.st/nws.php
+item_info_build=http://bro.adca.st/token2.php
 
 item_info_name=tok
 item_info_from=tokUrl
-#item_info_convert=getXML('%s','.*\w+["']\s*:\s*["']([^"']+).*','@pageUrl@')
-item_info_build=Ra2vjTJBQ1LEaWgJXoipaQ
+item_info_convert=getXML('%s','.*\w+["']\s*:\s*["']([^"']+).*','@pageUrl@')
+item_info_build=%s
 
 item_info_name=file.tmp
 item_info_from=pageUrl
-item_info_convert=getInfo('%s','.*(?:url|trap)\s*=\s*["']([^"']+).*','@REFERER@')
+item_info_convert=getInfo('%s','.*(?:url|trap)\s*=\s*["']([^"']+).*','http://bonstreams.net/mmhd/stream6.php')
 item_info_convert=decodeBase64
 item_info_build=%s
 
