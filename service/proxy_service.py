@@ -79,6 +79,7 @@ def create_decryptor(self, key, sequence):
         zuom_key = self.reader.stream.session.options.get("zuom-key")
         saw_key = self.reader.stream.session.options.get("saw-key")
         your_key = self.reader.stream.session.options.get("your-key")
+        mama_key = self.reader.stream.session.options.get("mama-key")
         if zoom_key:
             uri = 'http://www.zoomtv.me/k.php?q='+base64.urlsafe_b64encode(zoom_key+base64.urlsafe_b64encode(key.uri))
         elif zuom_key:
@@ -98,6 +99,10 @@ def create_decryptor(self, key, sequence):
                 uri = urljoin(saw_key,'/m/streams?ci='+_tmp[-3]+'&k='+_tmp[-1])
             else:
                 uri = key.uri
+        elif mama_key:
+           if 'nlsk' in key.uri:
+                _tmp = key.uri.split('&url=')
+                uri = 'http://mamahd.in/nba?url=' + _tmp[-1]
         elif your_key:
             if 'mlb.com' in key.uri:
                 _tmp = key.uri.split('?')
@@ -215,6 +220,8 @@ class MyHandler(BaseHTTPRequestHandler):
                     session.set_option("saw-key", headers['Referer'])
                 elif 'yoursportsinhd' in headers['Referer']:
                     session.set_option("your-key", headers['Referer'])
+                elif 'mamahd' in headers['Referer']:
+                    session.set_option("mama-key", headers['Referer'].split('&')[1])
         try:
             streams = session.streams(fURL)
             self.send_response(200)
