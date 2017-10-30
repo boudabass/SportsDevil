@@ -22,7 +22,7 @@ MA 02110-1301, USA.
 
 import xbmc
 import base64
-import urlparse
+import urlparse,urllib
 import sys
 from SocketServer import ThreadingMixIn
 from BaseHTTPServer import HTTPServer, BaseHTTPRequestHandler
@@ -31,6 +31,7 @@ import struct
 import livestreamer
 from livestreamer.exceptions import StreamError
 from urlparse import urljoin
+
 
 ##aes stuff
 _android_ssl = False
@@ -74,9 +75,9 @@ def create_decryptor(self, key, sequence):
         raise StreamError("Missing URI to decryption key")
 
     if self.key_uri != key.uri:
-
         zoom_key = self.reader.stream.session.options.get("zoom-key")
         zuom_key = self.reader.stream.session.options.get("zuom-key")
+        livecam_key = self.reader.stream.session.options.get("livecam-key")
         saw_key = self.reader.stream.session.options.get("saw-key")
         your_key = self.reader.stream.session.options.get("your-key")
         mama_key = self.reader.stream.session.options.get("mama-key")
@@ -84,6 +85,11 @@ def create_decryptor(self, key, sequence):
             uri = 'http://www.zoomtv.me/k.php?q='+base64.urlsafe_b64encode(zoom_key+base64.urlsafe_b64encode(key.uri))
         elif zuom_key:
             uri = 'http://www.zuom.xyz/k.php?q='+base64.urlsafe_b64encode(zuom_key+base64.urlsafe_b64encode(key.uri))
+        elif livecam_key:
+            print(livecam_key)
+            h = urlparse.urlparse(urllib.unquote(livecam_key)).netloc
+            q = urlparse.urlparse(urllib.unquote(livecam_key)).query            
+            uri = 'http://%s/kaes?q=%s'%(h,q)+base64.urlsafe_b64encode(livecam_key+base64.urlsafe_b64encode(key.uri))
         elif saw_key:
             if 'foxsportsgo' in key.uri:
                 _tmp = key.uri.split('/')
@@ -216,6 +222,8 @@ class MyHandler(BaseHTTPRequestHandler):
                     session.set_option("zoom-key", headers['Referer'].split('?')[1])                    
                 elif 'zuom' in headers['Referer']:
                     session.set_option("zuom-key", headers['Referer'].split('?')[1])
+                elif 'livecam' in headers['Referer'] or 'empty.space' in headers['Referer']:
+                    session.set_option("livecam-key", headers['Referer'])
                 elif 'sawlive' in headers['Referer']:
                     session.set_option("saw-key", headers['Referer'])
                 elif 'yoursportsinhd' in headers['Referer']:

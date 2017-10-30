@@ -199,7 +199,7 @@ class Parser(object):
                         return False
 
                     msg = 'Remote URL ' + inputList.curr_url + ' opened'
-                    #common.log("JairoXparserPY: " + data)
+                    common.log("JairoXparserPY: " + data)
                     if demystify:
                         msg += ' (demystified)'
                     common.log(msg)
