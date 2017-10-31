@@ -85,11 +85,10 @@ def create_decryptor(self, key, sequence):
             uri = 'http://www.zoomtv.me/k.php?q='+base64.urlsafe_b64encode(zoom_key+base64.urlsafe_b64encode(key.uri))
         elif zuom_key:
             uri = 'http://www.zuom.xyz/k.php?q='+base64.urlsafe_b64encode(zuom_key+base64.urlsafe_b64encode(key.uri))
-        elif livecam_key:
-            print(livecam_key)
+        elif livecam_key:           
             h = urlparse.urlparse(urllib.unquote(livecam_key)).netloc
             q = urlparse.urlparse(urllib.unquote(livecam_key)).query            
-            uri = 'http://%s/kaes?q=%s'%(h,q)+base64.urlsafe_b64encode(livecam_key+base64.urlsafe_b64encode(key.uri))
+            uri = 'http://%s/kaes?q='%h+base64.urlsafe_b64encode(q+base64.b64encode(key.uri))
         elif saw_key:
             if 'foxsportsgo' in key.uri:
                 _tmp = key.uri.split('/')
@@ -214,22 +213,24 @@ class MyHandler(BaseHTTPRequestHandler):
         if '|' in fURL:
                 sp = fURL.split('|')
                 fURL = sp[0]
-                headers = dict(urlparse.parse_qsl(sp[1]))
-                session.set_option("http-headers", headers)
+                headers = dict(urlparse.parse_qsl(sp[1]))                
                 session.set_option("http-ssl-verify", False)
                 session.set_option("hls-segment-threads", 1)
                 if 'zoomtv' in headers['Referer']:
                     session.set_option("zoom-key", headers['Referer'].split('?')[1])                    
                 elif 'zuom' in headers['Referer']:
                     session.set_option("zuom-key", headers['Referer'].split('?')[1])
-                elif 'livecam' in headers['Referer'] or 'empty.space' in headers['Referer']:
+                elif 'livecam' in headers['Referer'] or 'emty.space' in headers['Referer']:
                     session.set_option("livecam-key", headers['Referer'])
+                    headers.pop('Referer')
                 elif 'sawlive' in headers['Referer']:
                     session.set_option("saw-key", headers['Referer'])
                 elif 'yoursportsinhd' in headers['Referer']:
                     session.set_option("your-key", headers['Referer'])
                 elif 'mamahd' in headers['Referer']:
                     session.set_option("mama-key", headers['Referer'].split('&')[1])
+                
+                session.set_option("http-headers", headers)
         try:
             streams = session.streams(fURL)
             self.send_response(200)
