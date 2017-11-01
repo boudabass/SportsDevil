@@ -35,18 +35,18 @@ item_info_build=%s
 item_info_name=cookie1
 item_info_from=pageUrl
 item_info_convert=getCookies(PHPSESSID)
-item_info_convert=debug
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=cookie2
 item_info_from=pageUrl
 item_info_convert=getCookies(rmmad)
-item_info_convert=debug
+#item_info_convert=debug
 item_info_build=%s
 
 item_info_name=cookies
 item_info_from=rmmad='+cookie2+'
-item_info_convert=debug
+#item_info_convert=debug
 item_info_convert=quote(%s)
 #item_info_convert=quote(%s)
 item_info_build=%s
